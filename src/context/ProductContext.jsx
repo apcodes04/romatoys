@@ -16,6 +16,11 @@ export const ProductProvider = ({ children }) => {
       const prods = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setProducts(prods);
       setLoading(false);
+    }, (error) => {
+      console.error("Firebase fetch error:", error);
+      // Even if there is an error (like missing permissions), we MUST stop loading 
+      // so the rest of the app can render and show the error UI to the user.
+      setLoading(false);
     });
 
     return unsubscribe;
