@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { optimizeImageUrl } from '../utils/optimizeImage';
 import './ProductCard.css';
 
 const ProductCard = ({ product }) => {
-  const displayImage = product.images && product.images.length > 0 ? product.images[0] : product.image;
-  
   const hasDiscount = product.originalPrice && product.originalPrice > product.price;
   const discountPercent = hasDiscount ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0;
 
@@ -13,14 +12,14 @@ const ProductCard = ({ product }) => {
       <div className="product-image-container" style={{position: 'relative'}}>
         {product.isOutOfStock && <div className="public-badge-oos">Out of Stock</div>}
         {hasDiscount && !product.isOutOfStock && <div className="discount-badge" style={{position: 'absolute', top: '10px', right: '10px', background: '#ff4757', color: 'white', padding: '5px 10px', borderRadius: '5px', fontWeight: 'bold', zIndex: '2'}}>{discountPercent}% OFF</div>}
-        {(product.images && product.images.length > 0) ? (
+        {product.images && product.images.length > 1 ? (
           <div className="product-image-carousel">
             {product.images.map((img, i) => (
-              <img key={i} src={img} alt={`${product.name} ${i}`} className="product-image" />
+              <img key={i} src={optimizeImageUrl(img)} alt={`${product.name} ${i}`} className="product-image" loading="lazy" />
             ))}
           </div>
         ) : (
-          <img src={product.image} alt={product.name} className="product-image" />
+          <img src={optimizeImageUrl(product.image || (product.images && product.images[0]))} alt={product.name} className="product-image" loading="lazy" />
         )}
       </div>
       <div className="product-info">

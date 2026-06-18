@@ -4,6 +4,7 @@ import { ProductContext } from '../context/ProductContext';
 import { LeadContext } from '../context/LeadContext';
 import { ShippingContext } from '../context/ShippingContext';
 import { calculateShippingCost } from '../utils/shippingCalculator';
+import { optimizeImageUrl } from '../utils/optimizeImage';
 import { companyInfo } from '../data/companyInfo';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './ProductDetails.css';
@@ -60,17 +61,18 @@ const ProductDetails = () => {
     <div className="product-details-container">
       <div className="product-details-content">
         <div className="product-image-section">
-          <img src={mainImage} alt={product.name} className="product-details-img" />
+          <img src={optimizeImageUrl(mainImage)} alt={product.name} className="product-details-img" />
           
           {product.images && product.images.length > 1 && (
             <div className="image-gallery-thumbnails">
               {product.images.map((img, index) => (
                 <img 
                   key={index} 
-                  src={img} 
+                  src={optimizeImageUrl(img)} 
                   alt={`${product.name} ${index}`} 
                   className={`gallery-thumb ${mainImage === img ? 'active' : ''}`}
                   onClick={() => setMainImage(img)}
+                  loading="lazy"
                 />
               ))}
             </div>

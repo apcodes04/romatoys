@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
 import { ShippingContext } from '../context/ShippingContext';
 import { calculateShippingCost } from '../utils/shippingCalculator';
+import { optimizeImageUrl } from '../utils/optimizeImage';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Checkout.css';
 
@@ -210,7 +211,7 @@ const Checkout = () => {
           <div className="checkout-summary-section">
             <h2>Order Summary</h2>
             <div className="summary-item product-summary">
-              <img src={(product.images && product.images.length > 0) ? product.images[0] : product.image} alt={product.name} />
+              <img src={optimizeImageUrl((product.images && product.images.length > 0) ? product.images[0] : product.image)} alt={product.name} loading="lazy" />
               <div>
                 <h4>{product.name}</h4>
                 <p>₹{product.price.toLocaleString()}</p>
