@@ -41,12 +41,26 @@
   .filter-container {
     top: 100px; /* Mobile navbar height is approx 100px */
     padding: 10px;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 25px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    /* Hide scrollbar for clean app-like UI */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    border-radius: 0; /* Remove border radius if it goes edge to edge */
   }
+  
+  .filter-container::-webkit-scrollbar {
+    display: none;
+  }
+
   .filter-btn {
-    padding: 8px 15px;
-    font-size: 0.9rem;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    border-width: 1px;
   }
 }
 
