@@ -347,3 +347,38 @@
   justify-content: center;
   gap: 20px;
 }
+
+/* Admin Tabs */
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #dfe4ea;
+  padding-bottom: 10px;
+  overflow-x: auto;
+}
+
+.admin-tab {
+  padding: 10px 20px;
+  background: white;
+  border: 1px solid #dfe4ea;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #57606f;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.admin-tab:hover {
+  background: #f8f9fa;
+  border-color: #2f3542;
+  color: #2f3542;
+}
+
+.admin-tab.active {
+  background: #1e90ff;
+  border-color: #1e90ff;
+  color: white;
+  box-shadow: 0 4px 10px rgba(30,144,255,0.3);
+}

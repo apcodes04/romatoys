@@ -9,6 +9,13 @@ const OrdersDashboard = () => {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
+  // Tabs
+  const [activeTab, setActiveTab] = useState('All');
+
+  // Status Change
+  const [statusModalOpen, setStatusModalOpen] = useState(false);
+  const [statusTarget, setStatusTarget] = useState(null); // { orderId, newStatus }
+
   const requestDelete = (id) => {
     setItemToDelete(id);
     setDeleteModalOpen(true);
@@ -33,8 +40,25 @@ const OrdersDashboard = () => {
   };
 
   const handleStatusChange = (orderId, newStatus) => {
-    updateOrderStatus(orderId, newStatus);
+    setStatusTarget({ orderId, newStatus });
+    setStatusModalOpen(true);
   };
+
+  const confirmStatusChange = () => {
+    if (statusTarget) {
+      updateOrderStatus(statusTarget.orderId, statusTarget.newStatus);
+    }
+    setStatusModalOpen(false);
+    setStatusTarget(null);
+  };
+
+  const filteredOrders = orders.filter(order => {
+    if (activeTab === 'All') return true;
+    if (activeTab === 'Pending') return order.status === 'Pending Payment Verification';
+    return order.status === activeTab;
+  });
+
+  const tabs = ['All', 'Pending', 'Processing', 'Shipped', 'Delivered'];
 
   return (
     <div className="admin-dashboard">
@@ -43,6 +67,18 @@ const OrdersDashboard = () => {
         <div className="admin-actions">
           <Link to="/admin/dashboard" className="btn btn-secondary">Back to Products</Link>
         </div>
+      </div>
+
+      <div className="admin-tabs">
+        {tabs.map(tab => (
+          <button 
+            key={tab}
+            className={`admin-tab ${activeTab === tab ? 'active' : ''}`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab === 'Pending' ? 'Pending Verification' : tab}
+          </button>
+        ))}
       </div>
 
       <div className="admin-content">
@@ -59,7 +95,7 @@ const OrdersDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {orders.map(order => (
+            {filteredOrders.map(order => (
               <tr key={order.id}>
                 <td>{new Date(order.date).toLocaleDateString()}</td>
                 <td style={{fontSize: '0.8rem', color: '#57606f'}}>{order.id}</td>
@@ -102,9 +138,9 @@ const OrdersDashboard = () => {
                 </td>
               </tr>
             ))}
-            {orders.length === 0 && (
+            {filteredOrders.length === 0 && (
               <tr>
-                <td colSpan="7" className="text-center">No orders found.</td>
+                <td colSpan="7" className="text-center">No orders found in this category.</td>
               </tr>
             )}
           </tbody>
@@ -117,6 +153,17 @@ const OrdersDashboard = () => {
         message="Are you sure you want to permanently delete this order? This action cannot be undone." 
         onConfirm={confirmDelete} 
         onCancel={() => setDeleteModalOpen(false)} 
+      />
+
+      <ConfirmModal 
+        isOpen={statusModalOpen} 
+        title="Change Order Status" 
+        message={`Are you sure you want to move this order to ${statusTarget?.newStatus}?`} 
+        onConfirm={confirmStatusChange} 
+        onCancel={() => {
+          setStatusModalOpen(false);
+          setStatusTarget(null);
+        }} 
       />
     </div>
   );
