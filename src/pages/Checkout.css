@@ -1,0 +1,142 @@
+.checkout-container {
+  padding: 60px 20px;
+  background-color: #f1f2f6;
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-empty {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.checkout-content {
+  display: flex;
+  flex-direction: row;
+  max-width: 1200px;
+  width: 100%;
+  gap: 40px;
+}
+
+.order-summary, .payment-section {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  flex: 1;
+}
+
+.order-summary h2, .payment-section h2 {
+  color: #2f3542;
+  margin-bottom: 30px;
+  font-family: 'Fredoka One', cursive;
+  border-bottom: 2px solid #f1f2f6;
+  padding-bottom: 15px;
+}
+
+.summary-item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.summary-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.summary-info h3 {
+  font-size: 1.2rem;
+  color: #2f3542;
+}
+
+.summary-price {
+  font-weight: 800;
+  color: #ff4757;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.summary-total {
+  border-top: 2px solid #f1f2f6;
+  padding-top: 20px;
+  text-align: right;
+  color: #2f3542;
+  font-size: 1.4rem;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  color: #57606f;
+  font-weight: 600;
+}
+
+.form-group input, .form-group textarea {
+  padding: 12px;
+  border: 1px solid #dfe4ea;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.payment-methods-mockup {
+  margin-top: 10px;
+}
+
+.payment-methods-mockup p {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #57606f;
+}
+
+.methods-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.methods-grid label {
+  cursor: pointer;
+  color: #2f3542;
+}
+
+.btn-pay {
+  background-color: #2ed573;
+  color: white;
+  padding: 15px;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.btn-pay:hover {
+  background-color: #7bed9f;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 900px) {
+  .checkout-content {
+    flex-direction: column;
+  }
+}

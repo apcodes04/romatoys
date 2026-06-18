@@ -1,0 +1,61 @@
+.shop-page {
+  padding: 40px 20px;
+  background-color: #fcfcfc;
+  min-height: 80vh;
+}
+
+.shop-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.shop-header h1 {
+  font-size: 3rem;
+  color: #ff4757;
+  font-family: 'Fredoka One', cursive;
+  margin-bottom: 10px;
+}
+
+.shop-header p {
+  font-size: 1.2rem;
+  color: #747d8c;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 2px solid #1e90ff;
+  background: transparent;
+  color: #1e90ff;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: #1e90ff;
+  color: white;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.no-products {
+  text-align: center;
+  padding: 50px;
+  color: #a4b0be;
+}

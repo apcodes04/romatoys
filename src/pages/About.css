@@ -1,0 +1,118 @@
+.about-container {
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  min-height: 80vh;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.about-header h1 {
+  font-size: 3.5rem;
+  color: #ff4757;
+  font-family: 'Fredoka One', cursive;
+  margin-bottom: 15px;
+}
+
+.about-header p {
+  font-size: 1.2rem;
+  color: #747d8c;
+}
+
+.about-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.about-text-section {
+  background: white;
+  padding: 50px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.about-text-section h2 {
+  color: #2f3542;
+  margin-bottom: 20px;
+  font-family: 'Fredoka One', cursive;
+}
+
+.about-text-section p {
+  color: #57606f;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.stat-box {
+  text-align: center;
+  padding: 20px;
+  background: #f1f2f6;
+  border-radius: 15px;
+  width: 200px;
+}
+
+.stat-box h3 {
+  font-size: 2rem;
+  color: #1e90ff;
+  margin-bottom: 10px;
+}
+
+.stat-box p {
+  color: #747d8c;
+  font-weight: 600;
+  margin: 0;
+}
+
+.owner-section {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  gap: 40px;
+}
+
+.owner-image {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #ff4757;
+  box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+}
+
+.owner-info h2 {
+  font-size: 2.5rem;
+  color: #2f3542;
+  font-family: 'Fredoka One', cursive;
+  margin-bottom: 5px;
+}
+
+.owner-title {
+  color: #ffa502 !important;
+  font-weight: bold;
+  font-size: 1.2rem !important;
+  margin-bottom: 15px !important;
+}
+
+/* Mobile UI Adaptation */
+@media screen and (max-width: 900px) {
+  .owner-section {
+    flex-direction: column;
+    text-align: center;
+  }
+}

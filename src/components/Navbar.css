@@ -1,0 +1,142 @@
+.navbar {
+  background: #ffffff;
+  min-height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ff4757;
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: 'Fredoka One', cursive, sans-serif;
+  letter-spacing: 1px;
+}
+
+.logo-image {
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.nav-menu-wrapper {
+  display: flex;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  color: #2f3542;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-links:hover {
+  color: #ffa502;
+}
+
+.enquiry-link {
+  color: #2ed573;
+}
+
+.enquiry-link:hover {
+  color: #7bed9f;
+}
+
+/* Mobile UI Adaptation */
+@media screen and (max-width: 960px) {
+  .navbar {
+    padding: 10px 0 0 0;
+  }
+  
+  .navbar-container {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+  }
+
+  .navbar-logo {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+  }
+
+  .logo-image {
+    height: 40px;
+  }
+
+  .nav-menu-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    /* Hide scrollbar for clean app-like UI */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    border-top: 1px solid #f1f2f6;
+  }
+
+  .nav-menu-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-menu {
+    justify-content: flex-start;
+    padding: 0 10px;
+  }
+
+  .nav-item {
+    height: 50px;
+  }
+
+  .nav-links {
+    padding: 0.5rem 12px;
+    font-size: 0.95rem;
+    background: #f8f9fa;
+    margin: 0 5px;
+    border-radius: 20px;
+    border: 1px solid #dfe4ea;
+  }
+
+  .nav-links:active {
+    background: #ff4757;
+    color: white;
+    border-color: #ff4757;
+  }
+
+  .enquiry-link {
+    background: #eafff0;
+    border-color: #2ed573;
+  }
+}

@@ -1,0 +1,141 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-section {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  color: #ff4757;
+  font-family: 'Fredoka One', cursive;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.5rem;
+  color: #2f3542;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  padding: 12px 30px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #1e90ff;
+  color: white;
+  box-shadow: 0 4px 15px rgba(30, 144, 255, 0.4);
+}
+
+.btn-primary:hover {
+  background-color: #3742fa;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(55, 66, 250, 0.5);
+}
+
+/* Categories */
+.categories-section {
+  padding: 60px 20px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.categories-section h2 {
+  font-size: 2.5rem;
+  color: #ff4757;
+  margin-bottom: 40px;
+  font-family: 'Fredoka One', cursive;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.category-card {
+  text-decoration: none;
+  color: #2f3542;
+  background: #f1f2f6;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.category-card:hover {
+  transform: translateY(-10px);
+}
+
+.category-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.category-card h3 {
+  padding: 20px;
+  font-size: 1.5rem;
+}
+
+/* Shop Gallery */
+.shop-images-section {
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.shop-images-section h2 {
+  font-size: 2.5rem;
+  color: #2ed573;
+  margin-bottom: 10px;
+  font-family: 'Fredoka One', cursive;
+}
+
+.shop-images-section p {
+  font-size: 1.2rem;
+  color: #747d8c;
+  margin-bottom: 40px;
+}
+
+.shop-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shop-gallery img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.shop-gallery img:hover {
+  transform: scale(1.05);
+}
