@@ -105,7 +105,12 @@ const OrdersDashboard = () => {
                   <span style={{fontSize: '0.8rem'}}>{order.customerDetails.city} - {order.customerDetails.pincode}</span>
                 </td>
                 <td>{order.product.name}</td>
-                <td><strong>₹{order.totalAmount.toLocaleString()}</strong></td>
+                <td>
+                  <strong>₹{order.totalAmount.toLocaleString()}</strong><br/>
+                  {order.shippingCost !== undefined && (
+                    <span style={{fontSize: '0.8rem', color: '#ff4757'}}>+ ₹{order.shippingCost} Ship</span>
+                  )}
+                </td>
                 <td>
                   <select 
                     value={order.status} 

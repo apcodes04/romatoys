@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
+import { ShippingContext } from '../context/ShippingContext';
+import { calculateShippingCost } from '../utils/shippingCalculator';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Checkout.css';
 
@@ -10,6 +12,8 @@ const Checkout = () => {
   const navigate = useNavigate();
   const product = location.state?.product;
   const { addOrder } = useContext(OrderContext);
+  const { shippingRates } = useContext(ShippingContext);
+  const [shippingCost, setShippingCost] = useState(0);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -33,7 +37,18 @@ const Checkout = () => {
   }
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Calculate shipping when pincode is 6 digits
+    if (name === 'pincode') {
+      if (value.length === 6 && /^\d+$/.test(value)) {
+        const cost = calculateShippingCost(value, shippingRates);
+        setShippingCost(cost);
+      } else {
+        setShippingCost(0); // Reset if invalid/incomplete
+      }
+    }
   };
 
   const handleFileChange = (e) => {
@@ -50,7 +65,8 @@ const Checkout = () => {
         name: product.name,
         price: product.price
       },
-      totalAmount: product.price,
+      shippingCost: shippingCost,
+      totalAmount: product.price + shippingCost,
       status: 'Pending Payment Verification',
       screenshotUrl: screenshotUrl
     };
@@ -106,7 +122,7 @@ const Checkout = () => {
       const orderId = await saveOrder(null);
 
       const adminPhone = '917978823397';
-      const message = `*PAID ORDER RECEIVED*%0A%0A*Order ID:* ${orderId}%0A*Product:* ${product.name}%0A*Amount Paid:* ₹${product.price.toLocaleString()}%0A%0A*Customer Details:*%0AName: ${formData.name}%0APhone: ${formData.phone}%0AAddress: ${formData.address}, ${formData.city} - ${formData.pincode}%0A%0A_Please find my payment screenshot attached._`;
+      const message = `*PAID ORDER RECEIVED*%0A%0A*Order ID:* ${orderId}%0A*Product:* ${product.name}%0A*Subtotal:* ₹${product.price.toLocaleString()}%0A*Shipping:* ₹${shippingCost.toLocaleString()}%0A*Amount Paid:* ₹${(product.price + shippingCost).toLocaleString()}%0A%0A*Customer Details:*%0AName: ${formData.name}%0APhone: ${formData.phone}%0AAddress: ${formData.address}, ${formData.city} - ${formData.pincode}%0A%0A_Please find my payment screenshot attached._`;
       
       window.location.href = `https://wa.me/${adminPhone}?text=${message}`;
     } catch (error) {
@@ -160,7 +176,7 @@ const Checkout = () => {
                 <p style={{marginBottom: '15px', color: '#57606f'}}>Scan the QR code below using GPay, PhonePe, or Paytm to complete your purchase securely.</p>
                 <div className="qr-container" style={{textAlign: 'center', background: '#fff', padding: '20px', borderRadius: '10px', border: '2px dashed #dfe4ea'}}>
                   <img src="/images/QRcode payment/1.jpeg" alt="Payment QR Code" style={{maxWidth: '250px', width: '100%'}} />
-                  <p style={{marginTop: '15px', fontWeight: 'bold', color: '#2f3542', fontSize: '1.2rem'}}>Amount to Pay: <span style={{color: '#ff4757'}}>₹{product.price.toLocaleString()}</span></p>
+                  <p style={{marginTop: '15px', fontWeight: 'bold', color: '#2f3542', fontSize: '1.2rem'}}>Amount to Pay: <span style={{color: '#ff4757'}}>₹{(product.price + shippingCost).toLocaleString()}</span></p>
                 </div>
                 
                 <div style={{marginTop: '30px'}}>
@@ -205,11 +221,15 @@ const Checkout = () => {
               </div>
               <div className="summary-row">
                 <span>Shipping</span>
-                <span style={{color: '#2ed573', fontWeight: 'bold'}}>Free</span>
+                {shippingCost > 0 ? (
+                  <span style={{color: '#ff4757'}}>₹{shippingCost.toLocaleString()}</span>
+                ) : (
+                  <span style={{color: '#57606f', fontSize: '0.9rem'}}>Enter Pin Code to calculate</span>
+                )}
               </div>
               <div className="summary-row total">
                 <span>Total</span>
-                <span>₹{product.price.toLocaleString()}</span>
+                <span>₹{(product.price + shippingCost).toLocaleString()}</span>
               </div>
             </div>
           </div>
