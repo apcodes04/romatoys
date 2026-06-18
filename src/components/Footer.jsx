@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { companyInfo } from '../data/companyInfo';
 import './Footer.css';
 
@@ -31,6 +32,7 @@ const Footer = () => {
           <div className="footer-link-items">
             <h2>Social Media</h2>
             <a href={companyInfo.instagram} target="_blank" rel="noreferrer">Instagram</a>
+            <Link to="/admin/login" style={{color: '#fff', textDecoration: 'none', marginTop: '10px', fontSize: '0.9rem', opacity: '0.7'}}>Admin Login</Link>
           </div>
         </div>
       </div>
