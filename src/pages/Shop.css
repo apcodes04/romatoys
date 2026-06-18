@@ -27,6 +27,27 @@
   flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 40px;
+  position: sticky;
+  top: 80px; /* Desktop navbar height */
+  z-index: 100;
+  background-color: rgba(252, 252, 252, 0.85); /* Matches shop-page background with slight transparency */
+  padding: 15px 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 960px) {
+  .filter-container {
+    top: 100px; /* Mobile navbar height is approx 100px */
+    padding: 10px;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+  .filter-btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
 }
 
 .filter-btn {
