@@ -68,7 +68,7 @@ const AdminDashboard = () => {
       <div className="admin-header">
         <h1>Admin Dashboard</h1>
         <div className="admin-actions">
-          <button onClick={() => setShippingModalOpen(true)} className="btn btn-secondary" style={{background: '#ffa502', color: 'white', border: 'none'}}>Shipping Rates</button>
+          <button onClick={() => setShippingModalOpen(true)} className="btn btn-secondary" style={{background: '#ffa502', color: '#000000', border: 'none', fontWeight: 'bold'}}>Shipping Rates</button>
           <Link to="/admin/orders" className="btn btn-secondary">View Orders</Link>
           <Link to="/admin/leads" className="btn btn-secondary">View Leads</Link>
           <Link to="/admin/product/new" className="btn btn-primary">Add New Product</Link>
