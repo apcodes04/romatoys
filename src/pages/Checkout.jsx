@@ -11,16 +11,19 @@ const Checkout = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const product = location.state?.product;
+  const prefillPincode = location.state?.prefillPincode || '';
+  const prefillShipping = location.state?.prefillShipping || 0;
+  
   const { addOrder } = useContext(OrderContext);
   const { shippingRates } = useContext(ShippingContext);
-  const [shippingCost, setShippingCost] = useState(0);
+  const [shippingCost, setShippingCost] = useState(prefillShipping);
 
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     address: '',
     city: '',
-    pincode: ''
+    pincode: prefillPincode
   });
 
   const [screenshotFile, setScreenshotFile] = useState(null);

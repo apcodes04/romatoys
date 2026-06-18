@@ -206,6 +206,122 @@
   fill: white;
 }
 
+/* Pincode Modal Styles */
+.pincode-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+}
+
+.pincode-modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 450px;
+  width: 90%;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  animation: slideUp 0.3s ease forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #f1f2f6;
+  border: none;
+  font-size: 1.5rem;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #2f3542;
+  transition: all 0.2s;
+}
+
+.close-modal-btn:hover {
+  background: #ff4757;
+  color: white;
+}
+
+.pincode-modal-content h2 {
+  font-family: 'Fredoka One', cursive;
+  color: #2f3542;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.pincode-input-group {
+  margin-bottom: 25px;
+}
+
+.pincode-input {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.5rem;
+  text-align: center;
+  letter-spacing: 5px;
+  font-weight: bold;
+  border: 2px solid #dfe4ea;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.pincode-input:focus {
+  border-color: #1e90ff;
+  box-shadow: 0 0 0 3px rgba(30,144,255,0.2);
+}
+
+.shipping-estimate-box {
+  background: #f8f9fa;
+  border: 1px solid #dfe4ea;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.estimate-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #57606f;
+}
+
+.estimate-row.total {
+  border-top: 2px dashed #dfe4ea;
+  padding-top: 15px;
+  margin-top: 15px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2f3542;
+}
+
+.proceed-checkout-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2ed573, #26de81);
+  box-shadow: 0 4px 15px rgba(46, 213, 115, 0.3);
+}
 .custom-buy-now-btn:active {
   transform: translate(2px , 4px);
   box-shadow: 0px 1px 0px rgb(139, 113, 255);

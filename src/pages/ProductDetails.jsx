@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ProductContext } from '../context/ProductContext';
 import { LeadContext } from '../context/LeadContext';
+import { ShippingContext } from '../context/ShippingContext';
+import { calculateShippingCost } from '../utils/shippingCalculator';
 import { companyInfo } from '../data/companyInfo';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './ProductDetails.css';
@@ -11,6 +13,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const { products: allProducts } = useContext(ProductContext);
   const { addLead } = useContext(LeadContext);
+  const { shippingRates } = useContext(ShippingContext);
   const product = allProducts.find(p => p.id === id);
 
   useDocumentTitle(product ? `${product.name} | Roma Toys Mumbai` : 'Product Not Found | Roma Toys');
@@ -18,6 +21,10 @@ const ProductDetails = () => {
   const [mainImage, setMainImage] = useState('');
   const [leadForm, setLeadForm] = useState({ name: '', phone: '', email: '' });
   const [leadSubmitted, setLeadSubmitted] = useState(false);
+  
+  const [pincodeModalOpen, setPincodeModalOpen] = useState(false);
+  const [pincodeInput, setPincodeInput] = useState('');
+  const [calculatedShipping, setCalculatedShipping] = useState(null);
 
   useEffect(() => {
     if (product) {
@@ -102,7 +109,7 @@ const ProductDetails = () => {
           {!product.isOutOfStock ? (
             <button 
               className="custom-buy-now-btn"
-              onClick={() => navigate('/checkout', { state: { product } })}
+              onClick={() => setPincodeModalOpen(true)}
             >
               Shop now
               <svg className="cartIcon" viewBox="0 0 576 512"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" /></svg>
@@ -139,6 +146,59 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+
+      {pincodeModalOpen && (
+        <div className="pincode-modal-overlay">
+          <div className="pincode-modal-content">
+            <button className="close-modal-btn" onClick={() => setPincodeModalOpen(false)}>×</button>
+            <h2>Check Delivery Estimate</h2>
+            <p style={{color: '#57606f', marginBottom: '20px', fontSize: '0.9rem'}}>Please enter your delivery Pincode to calculate shipping charges for this bulky item.</p>
+            
+            <div className="pincode-input-group">
+              <input 
+                type="text" 
+                maxLength="6" 
+                placeholder="Enter 6-digit Pincode" 
+                value={pincodeInput}
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, '');
+                  setPincodeInput(val);
+                  if (val.length === 6) {
+                    setCalculatedShipping(calculateShippingCost(val, shippingRates));
+                  } else {
+                    setCalculatedShipping(null);
+                  }
+                }}
+                className="pincode-input"
+              />
+            </div>
+
+            {calculatedShipping !== null && (
+              <div className="shipping-estimate-box">
+                <div className="estimate-row">
+                  <span>Product Price:</span>
+                  <span>₹{product.price.toLocaleString()}</span>
+                </div>
+                <div className="estimate-row">
+                  <span>Estimated Shipping:</span>
+                  <span style={{color: '#ff4757'}}>+ ₹{calculatedShipping.toLocaleString()}</span>
+                </div>
+                <div className="estimate-row total">
+                  <span>Grand Total:</span>
+                  <span>₹{(product.price + calculatedShipping).toLocaleString()}</span>
+                </div>
+                
+                <button 
+                  className="btn btn-primary proceed-checkout-btn"
+                  onClick={() => navigate('/checkout', { state: { product, prefillPincode: pincodeInput, prefillShipping: calculatedShipping } })}
+                >
+                  Proceed to Secure Checkout
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
