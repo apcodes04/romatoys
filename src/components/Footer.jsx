@@ -32,7 +32,6 @@ const Footer = () => {
           <div className="footer-link-items">
             <h2>Social Media</h2>
             <a href={companyInfo.instagram} target="_blank" rel="noreferrer">Instagram</a>
-            <Link to="/admin/login" style={{color: '#fff', textDecoration: 'none', marginTop: '10px', fontSize: '0.9rem', opacity: '0.7'}}>Admin Login</Link>
           </div>
         </div>
       </div>
@@ -41,7 +40,9 @@ const Footer = () => {
           <div className="footer-logo">
             <span className="social-logo">Roma Toys</span>
           </div>
-          <small className="website-rights">Roma Toys © {new Date().getFullYear()}</small>
+          <small className="website-rights">
+            <Link to="/admin/login" style={{color: 'black', textDecoration: 'none', fontWeight: 'bold'}}>Admin</Link> Roma Toys © {new Date().getFullYear()}
+          </small>
         </div>
       </section>
     </footer>
