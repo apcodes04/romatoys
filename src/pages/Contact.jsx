@@ -1,8 +1,10 @@
 import React from 'react';
 import { companyInfo } from '../data/companyInfo';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Contact.css';
 
 const Contact = () => {
+  useDocumentTitle('Contact Us | Roma Toys Mumbai');
   return (
     <div className="contact-container">
       <div className="contact-header">

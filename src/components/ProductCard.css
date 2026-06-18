@@ -21,6 +21,22 @@
   align-items: center;
   justify-content: center;
   background-color: #f8f9fa;
+  position: relative;
+}
+
+.public-badge-oos {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(255, 71, 87, 0.9);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  z-index: 10;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .product-image {
@@ -30,7 +46,26 @@
   transition: transform 0.4s ease;
 }
 
-.product-card:hover .product-image {
+.product-image-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  height: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.product-image-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.product-image-carousel .product-image {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+.product-card:hover .product-image-container > .product-image {
   transform: scale(1.08);
 }
 

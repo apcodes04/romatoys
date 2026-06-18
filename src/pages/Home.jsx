@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { companyInfo } from '../data/companyInfo';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Home.css';
 
 const Home = () => {
+  useDocumentTitle('Roma Toys | Best Battery Operated Toy Cars & Bikes in Mumbai');
   return (
     <div className="home-container">
       {/* Hero Section */}

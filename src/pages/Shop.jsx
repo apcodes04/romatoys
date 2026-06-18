@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { allProducts } from '../data/products';
+import { ProductContext } from '../context/ProductContext';
 import ProductCard from '../components/ProductCard';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Shop.css';
 
 const Shop = () => {
+  useDocumentTitle('Shop Toy Cars & Jeeps | Roma Toys Mumbai');
   const location = useLocation();
   const [filter, setFilter] = useState('all');
+  const { products: allProducts } = useContext(ProductContext);
 
   useEffect(() => {
     if (location.state && location.state.category) {
@@ -14,9 +17,14 @@ const Shop = () => {
     }
   }, [location]);
 
+  const sortedProducts = [...allProducts].sort((a, b) => {
+    if (a.isOutOfStock === b.isOutOfStock) return 0;
+    return a.isOutOfStock ? 1 : -1;
+  });
+
   const filteredProducts = filter === 'all' 
-    ? allProducts 
-    : allProducts.filter(p => p.category === filter);
+    ? sortedProducts 
+    : sortedProducts.filter(p => p.category === filter);
 
   return (
     <div className="shop-page">
