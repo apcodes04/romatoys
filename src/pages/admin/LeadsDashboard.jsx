@@ -1,10 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LeadContext } from '../../context/LeadContext';
+import ConfirmModal from '../../components/ConfirmModal';
 import './Admin.css';
 
 const LeadsDashboard = () => {
   const { leads, deleteLead } = useContext(LeadContext);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+
+  const requestDelete = (id) => {
+    setItemToDelete(id);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (itemToDelete) {
+      deleteLead(itemToDelete);
+    }
+    setDeleteModalOpen(false);
+    setItemToDelete(null);
+  };
 
   // Group leads by product
   const leadSummary = leads.reduce((acc, lead) => {
@@ -74,7 +90,7 @@ const LeadsDashboard = () => {
                 <td><a href={`mailto:${lead.customerEmail}`} style={{color: '#1e90ff', textDecoration: 'none'}}>{lead.customerEmail}</a></td>
                 <td>{lead.productName}</td>
                 <td>
-                  <button onClick={() => { if(window.confirm('Delete this lead?')) deleteLead(lead.id) }} className="btn-sm btn-delete">Remove</button>
+                  <button onClick={() => requestDelete(lead.id)} className="btn-sm btn-delete">Remove</button>
                 </td>
               </tr>
             ))}
@@ -86,6 +102,14 @@ const LeadsDashboard = () => {
           </tbody>
         </table>
       </div>
+
+      <ConfirmModal 
+        isOpen={deleteModalOpen} 
+        title="Delete Lead" 
+        message="Are you sure you want to permanently delete this customer lead?" 
+        onConfirm={confirmDelete} 
+        onCancel={() => setDeleteModalOpen(false)} 
+      />
     </div>
   );
 };

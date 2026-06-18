@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ProductContext } from '../../context/ProductContext';
 import { AuthContext } from '../../context/AuthContext';
+import ConfirmModal from '../../components/ConfirmModal';
 import './Admin.css';
 
 const AdminDashboard = () => {
@@ -10,6 +11,21 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+
+  const requestDelete = (id) => {
+    setItemToDelete(id);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (itemToDelete) {
+      deleteProduct(itemToDelete);
+    }
+    setDeleteModalOpen(false);
+    setItemToDelete(null);
+  };
 
   const handleLogout = () => {
     logout();
@@ -104,7 +120,7 @@ const AdminDashboard = () => {
                     <button onClick={() => moveProductUp(product.id)} disabled={index === 0} className="btn-sm btn-move" title="Move Up">↑</button>
                     <button onClick={() => moveProductDown(product.id)} disabled={index === products.length - 1} className="btn-sm btn-move" title="Move Down">↓</button>
                     <Link to={`/admin/product/edit/${product.id}`} className="btn-sm btn-edit">Edit</Link>
-                    <button onClick={() => { if(window.confirm('Are you sure?')) deleteProduct(product.id) }} className="btn-sm btn-delete">Delete</button>
+                    <button onClick={() => requestDelete(product.id)} className="btn-sm btn-delete">Delete</button>
                   </div>
                 </td>
               </tr>
@@ -117,6 +133,14 @@ const AdminDashboard = () => {
           </tbody>
         </table>
       </div>
+
+      <ConfirmModal 
+        isOpen={deleteModalOpen} 
+        title="Delete Product" 
+        message="Are you sure you want to permanently delete this product? This action cannot be undone." 
+        onConfirm={confirmDelete} 
+        onCancel={() => setDeleteModalOpen(false)} 
+      />
     </div>
   );
 };

@@ -1,10 +1,26 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { OrderContext } from '../../context/OrderContext';
+import ConfirmModal from '../../components/ConfirmModal';
 import './Admin.css';
 
 const OrdersDashboard = () => {
   const { orders, updateOrderStatus, deleteOrder } = useContext(OrderContext);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+
+  const requestDelete = (id) => {
+    setItemToDelete(id);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (itemToDelete) {
+      deleteOrder(itemToDelete);
+    }
+    setDeleteModalOpen(false);
+    setItemToDelete(null);
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -82,7 +98,7 @@ const OrdersDashboard = () => {
                   )}
                 </td>
                 <td>
-                  <button onClick={() => { if(window.confirm('Delete this order permanently?')) deleteOrder(order.id) }} className="btn-sm btn-delete">Delete</button>
+                  <button onClick={() => requestDelete(order.id)} className="btn-sm btn-delete">Delete</button>
                 </td>
               </tr>
             ))}
@@ -94,6 +110,14 @@ const OrdersDashboard = () => {
           </tbody>
         </table>
       </div>
+
+      <ConfirmModal 
+        isOpen={deleteModalOpen} 
+        title="Delete Order" 
+        message="Are you sure you want to permanently delete this order? This action cannot be undone." 
+        onConfirm={confirmDelete} 
+        onCancel={() => setDeleteModalOpen(false)} 
+      />
     </div>
   );
 };
