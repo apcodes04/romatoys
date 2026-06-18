@@ -225,7 +225,7 @@ const Checkout = () => {
               <div className="summary-row">
                 <span>Shipping</span>
                 {shippingCost > 0 ? (
-                  <span style={{color: '#ff4757'}}>₹{shippingCost.toLocaleString()}</span>
+                  <span>₹{shippingCost.toLocaleString()}</span>
                 ) : (
                   <span style={{color: '#57606f', fontSize: '0.9rem'}}>Enter Pin Code to calculate</span>
                 )}

@@ -181,7 +181,7 @@ const ProductDetails = () => {
                 </div>
                 <div className="estimate-row">
                   <span>Estimated Shipping:</span>
-                  <span style={{color: '#ff4757'}}>+ ₹{calculatedShipping.toLocaleString()}</span>
+                  <span>+ ₹{calculatedShipping.toLocaleString()}</span>
                 </div>
                 <div className="estimate-row total">
                   <span>Grand Total:</span>
