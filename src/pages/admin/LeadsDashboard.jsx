@@ -57,8 +57,8 @@ const LeadsDashboard = () => {
           <tbody>
             {summaryArray.map((item, index) => (
               <tr key={index}>
-                <td><strong>{item.productName}</strong></td>
-                <td><span style={{background: '#ff4757', color: 'white', padding: '5px 10px', borderRadius: '15px', fontWeight: 'bold'}}>{item.count}</span></td>
+                <td data-label="Product Name"><strong>{item.productName}</strong></td>
+                <td data-label="Customers Waiting"><span style={{background: '#ff4757', color: 'white', padding: '5px 10px', borderRadius: '15px', fontWeight: 'bold'}}>{item.count}</span></td>
               </tr>
             ))}
             {summaryArray.length === 0 && (
@@ -84,12 +84,12 @@ const LeadsDashboard = () => {
           <tbody>
             {leads.map(lead => (
               <tr key={lead.id}>
-                <td>{new Date(lead.date).toLocaleDateString()}</td>
-                <td>{lead.customerName}</td>
-                <td><a href={`tel:${lead.customerPhone}`} style={{color: '#1e90ff', textDecoration: 'none'}}>{lead.customerPhone}</a></td>
-                <td><a href={`mailto:${lead.customerEmail}`} style={{color: '#1e90ff', textDecoration: 'none'}}>{lead.customerEmail}</a></td>
-                <td>{lead.productName}</td>
-                <td>
+                <td data-label="Date">{new Date(lead.date).toLocaleDateString()}</td>
+                <td data-label="Customer Name">{lead.customerName}</td>
+                <td data-label="Phone"><a href={`tel:${lead.customerPhone}`} style={{color: '#1e90ff', textDecoration: 'none'}}>{lead.customerPhone}</a></td>
+                <td data-label="Email"><a href={`mailto:${lead.customerEmail}`} style={{color: '#1e90ff', textDecoration: 'none'}}>{lead.customerEmail}</a></td>
+                <td data-label="Requested Product">{lead.productName}</td>
+                <td data-label="Action">
                   <button onClick={() => requestDelete(lead.id)} className="btn-sm btn-delete">Remove</button>
                 </td>
               </tr>

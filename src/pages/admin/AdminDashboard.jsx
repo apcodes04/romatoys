@@ -109,16 +109,16 @@ const AdminDashboard = () => {
                 className={`draggable-row ${draggedIndex === index ? 'dragging-row' : ''} ${product.isOutOfStock ? 'row-out-of-stock' : ''}`}
                 style={{ cursor: 'move' }}
               >
-                <td>
-                  <div style={{position: 'relative'}}>
+                <td data-label="Image">
+                  <div style={{position: 'relative', display: 'inline-block'}}>
                     <img src={(product.images && product.images.length > 0) ? product.images[0] : product.image} alt={product.name} className="admin-thumb" />
                     {product.isOutOfStock && <span className="admin-badge-oos">OOS</span>}
                   </div>
                 </td>
-                <td>{product.name}</td>
-                <td className="admin-cat">{product.category}</td>
-                <td>₹{product.price}</td>
-                <td>
+                <td data-label="Name" style={{fontWeight: 'bold', color: '#2f3542'}}>{product.name}</td>
+                <td data-label="Category" className="admin-cat">{product.category}</td>
+                <td data-label="Price" style={{color: '#2ed573', fontWeight: 'bold'}}>₹{product.price}</td>
+                <td data-label="Actions">
                   <div className="action-buttons-sm">
                     <button onClick={() => moveProductUp(product.id)} disabled={index === 0} className="btn-sm btn-move" title="Move Up">↑</button>
                     <button onClick={() => moveProductDown(product.id)} disabled={index === products.length - 1} className="btn-sm btn-move" title="Move Down">↓</button>

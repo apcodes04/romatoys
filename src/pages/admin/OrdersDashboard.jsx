@@ -97,21 +97,21 @@ const OrdersDashboard = () => {
           <tbody>
             {filteredOrders.map(order => (
               <tr key={order.id}>
-                <td>{new Date(order.date).toLocaleDateString()}</td>
-                <td style={{fontSize: '0.8rem', color: '#57606f'}}>{order.id}</td>
-                <td>
+                <td data-label="Date">{new Date(order.date).toLocaleDateString()}</td>
+                <td data-label="Order ID" style={{fontSize: '0.8rem', color: '#57606f'}}>{order.id}</td>
+                <td data-label="Customer">
                   <strong>{order.customerDetails.name}</strong><br/>
                   <a href={`tel:${order.customerDetails.phone}`} style={{fontSize: '0.8rem', color: '#1e90ff', textDecoration: 'none'}}>{order.customerDetails.phone}</a><br/>
                   <span style={{fontSize: '0.8rem'}}>{order.customerDetails.city} - {order.customerDetails.pincode}</span>
                 </td>
-                <td>{order.product.name}</td>
-                <td>
+                <td data-label="Product">{order.product.name}</td>
+                <td data-label="Amount">
                   <strong>₹{order.totalAmount.toLocaleString()}</strong><br/>
                   {order.shippingCost !== undefined && (
                     <span style={{fontSize: '0.8rem', color: '#ff4757'}}>+ ₹{order.shippingCost} Ship</span>
                   )}
                 </td>
-                <td>
+                <td data-label="Status">
                   <select 
                     value={order.status} 
                     onChange={(e) => handleStatusChange(order.id, e.target.value)}
@@ -138,7 +138,7 @@ const OrdersDashboard = () => {
                     </a>
                   )}
                 </td>
-                <td>
+                <td data-label="Actions">
                   <button onClick={() => requestDelete(order.id)} className="btn-sm btn-delete">Delete</button>
                 </td>
               </tr>

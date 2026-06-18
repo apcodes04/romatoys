@@ -32,11 +32,24 @@ export const ShippingProvider = ({ children }) => {
           setShippingRates(defaultRates);
         } catch (error) {
           console.error("Error creating default shipping rates", error);
+          setShippingRates(defaultRates); // Fallback so UI works
         }
         setLoading(false);
       }
     }, (error) => {
       console.error("Firebase fetch error:", error);
+      // Provide default rates so the Admin UI doesn't crash on permission denied
+      const fallbackRates = {
+        local: { name: 'Local (MH/Goa/GJ)', rate: 750 },
+        metros: { name: 'Major Metros', rate: 1100 },
+        north: { name: 'North India', rate: 1400 },
+        south: { name: 'South India', rate: 1200 },
+        east: { name: 'East India', rate: 1400 },
+        farnorth: { name: 'Far North (J&K, HP)', rate: 2500 },
+        northeast: { name: 'North East India', rate: 3000 },
+        default: { name: 'Default/Other', rate: 1500 }
+      };
+      setShippingRates(fallbackRates);
       setLoading(false);
     });
 
