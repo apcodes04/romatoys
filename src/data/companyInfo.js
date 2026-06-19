@@ -1,6 +1,6 @@
 export const companyInfo = {
   name: "Roma Toys",
-  yearOfEstablishment: 2017,
+  yearOfEstablishment: 2015,
   gstin: "27ATPPK4389L1ZS",
   natureOfBusiness: ["Dealers", "Manufacturers", "Wholesalers", "Distributors", "Exporters", "Importers"],
   paymentModes: ["Visa / Master Card / Rupay", "Cheque", "Cash", "Google Pay"],
