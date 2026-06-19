@@ -22,23 +22,24 @@ const About = () => {
           </div>
         </div>
 
+        <div className="stats-grid">
+          <div className="stat-box">
+            <h3>{companyInfo.yearOfEstablishment}</h3>
+            <p>Established</p>
+          </div>
+          <div className="stat-box">
+            <h3>Crawford Market</h3>
+            <p>Location</p>
+          </div>
+          <div className="stat-box">
+            <h3>1000+</h3>
+            <p>Happy Kids</p>
+          </div>
+        </div>
+
         <div className="about-text-section">
           <h2>Our Story</h2>
           <p>{companyInfo.aboutText}</p>
-          <div className="stats-grid">
-            <div className="stat-box">
-              <h3>{companyInfo.yearOfEstablishment}</h3>
-              <p>Established</p>
-            </div>
-            <div className="stat-box">
-              <h3>Crawford Market</h3>
-              <p>Location</p>
-            </div>
-            <div className="stat-box">
-              <h3>1000+</h3>
-              <p>Happy Kids</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
