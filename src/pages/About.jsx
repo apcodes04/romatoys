@@ -13,6 +13,15 @@ const About = () => {
       </div>
 
       <div className="about-content">
+        <div className="owner-section">
+          <img src="/images/about us/owner.jpg" alt={companyInfo.proprietor} className="owner-image" />
+          <div className="owner-info">
+            <h2>{companyInfo.proprietor}</h2>
+            <p className="owner-title">Proprietor</p>
+            <p>Dedicated to bringing joy to children with the highest quality toys and exceptional customer service.</p>
+          </div>
+        </div>
+
         <div className="about-text-section">
           <h2>Our Story</h2>
           <p>{companyInfo.aboutText}</p>
@@ -29,15 +38,6 @@ const About = () => {
               <h3>1000+</h3>
               <p>Happy Kids</p>
             </div>
-          </div>
-        </div>
-
-        <div className="owner-section">
-          <img src="/images/about us/owner.jpg" alt={companyInfo.proprietor} className="owner-image" />
-          <div className="owner-info">
-            <h2>{companyInfo.proprietor}</h2>
-            <p className="owner-title">Proprietor</p>
-            <p>Dedicated to bringing joy to children with the highest quality toys and exceptional customer service.</p>
           </div>
         </div>
       </div>
