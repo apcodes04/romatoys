@@ -70,7 +70,7 @@ const Home = () => {
             ></iframe>
             <div style={{background: '#ff4757', padding: '15px', textAlign: 'center'}}>
               <a 
-                href="https://www.google.com/maps/dir/?api=1&destination=18.9489648,72.8328618" 
+                href="https://maps.app.goo.gl/ihEomRkzNQLcmhQb8" 
                 target="_blank" 
                 rel="noreferrer"
                 style={{color: 'white', textDecoration: 'none', fontWeight: 'bold', fontSize: '1.1rem', display: 'block'}}
