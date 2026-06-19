@@ -1,21 +1,21 @@
 Region,State/Zone,Estimated_Delivery_Days,Estimated_Shipping_Cost_INR
-Local,Mumbai (Within City),1-2,500
-Within State,Maharashtra (Rest of MH),2-3,750
-Regional,Gujarat,3-4,800
-Regional,Madhya Pradesh,3-4,850
-Regional,Goa,3-4,800
-Metros,Delhi NCR,4-5,1200
-Metros,Karnataka (Bangalore),4-5,1100
-Metros,Tamil Nadu (Chennai),4-6,1150
-Metros,Telangana (Hyderabad),4-5,1000
-Metros,West Bengal (Kolkata),5-7,1300
-North India,Punjab & Haryana,5-7,1400
-North India,Uttar Pradesh,5-7,1400
-North India,Rajasthan,4-6,1100
-South India,Kerala,5-7,1350
-South India,Andhra Pradesh,5-6,1100
-East India,Bihar & Jharkhand,6-8,1500
-East India,Odisha,5-7,1400
-Far North,Jammu & Kashmir / Himachal,7-10,2500
-North East,Assam & Sister States,8-12,3000
-Islands,Andaman & Lakshadweep,10-15,4500
+Local,Mumbai (Within City),01-Feb,500
+Within State,Maharashtra (Rest of MH),02-Mar,750
+Regional,Gujarat,03-Apr,800
+Regional,Madhya Pradesh,03-Apr,850
+Regional,Goa,03-Apr,800
+Metros,Delhi NCR,04-May,1200
+Metros,Karnataka (Bangalore),04-May,1100
+Metros,Tamil Nadu (Chennai),04-Jun,1150
+Metros,Telangana (Hyderabad),04-May,1000
+Metros,West Bengal (Kolkata),05-Jul,1300
+North India,Punjab & Haryana,05-Jul,1400
+North India,Uttar Pradesh,05-Jul,1400
+North India,Rajasthan,04-Jun,1100
+South India,Kerala,05-Jul,1350
+South India,Andhra Pradesh,05-Jun,1100
+East India,Bihar & Jharkhand,06-Aug,1500
+East India,Odisha,05-Jul,1400
+Far North,Jammu & Kashmir / Himachal,07-Oct,2500
+North East,Assam & Sister States,08-Dec,3000
+Islands,Andaman & Lakshadweep,Oct-15,4500
