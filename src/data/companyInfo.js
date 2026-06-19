@@ -1,7 +1,7 @@
 export const companyInfo = {
   name: "Roma Toys",
   yearOfEstablishment: 2017,
-  gstin: "27AEYPL9011Q1ZI",
+  gstin: "27ATPPK4389L1ZS",
   natureOfBusiness: ["Dealers", "Manufacturers", "Wholesalers", "Distributors", "Exporters", "Importers"],
   paymentModes: ["Visa / Master Card / Rupay", "Cheque", "Cash", "Google Pay"],
   address: "2/2A Floor G-1,Plot No 217/219/217,Patel Building, Chakala Market, Sheriff Devji Street, Mandavi, Mumbai- 400003",
