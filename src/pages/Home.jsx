@@ -56,14 +56,13 @@ const Home = () => {
         <h2>Visit Our Store in Mumbai</h2>
         <p style={{marginBottom: '30px', fontSize: '1.2rem', color: '#57606f'}}>{companyInfo.address}</p>
         
-        <div className="location-container" style={{maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '30px', alignItems: 'flex-start'}}>
+        <div className="location-container" style={{maxWidth: '1000px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '30px', alignItems: 'stretch'}}>
           {/* Map */}
-          <div className="map-wrapper" style={{flex: '1 1 400px', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.1)'}}>
+          <div className="map-wrapper" style={{flex: '2 1 500px', display: 'flex', flexDirection: 'column', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.1)'}}>
             <iframe 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.602860225355!2d72.83286187497399!3d18.948964882229667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce24202fb2cd%3A0xbb7b9fb1e5949da!2sRoma%20Toys!5e0!3m2!1sen!2sin!4v1781876640347!5m2!1sen!2sin" 
               width="100%" 
-              height="350" 
-              style={{border: 0, display: 'block'}} 
+              style={{flexGrow: 1, minHeight: '400px', border: 0, display: 'block'}} 
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
@@ -82,10 +81,9 @@ const Home = () => {
           </div>
 
           {/* Shop Images */}
-          <div className="shop-gallery" style={{flex: '2 1 500px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '15px'}}>
-            <img src="/images/shopimage/1.png" alt="Shop view 1" style={{width: '100%', borderRadius: '10px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
-            <img src="/images/shopimage/2.png" alt="Shop view 2" style={{width: '100%', borderRadius: '10px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
-            <img src="/images/shopimage/3.png" alt="Shop view 3" style={{width: '100%', borderRadius: '10px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
+          <div className="shop-gallery" style={{flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '20px'}}>
+            <img src="/images/shopimage/1.png" alt="Shop view 1" style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
+            <img src="/images/shopimage/3.png" alt="Shop view 3" style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
           </div>
         </div>
       </section>
