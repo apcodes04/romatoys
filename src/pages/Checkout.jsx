@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { OrderContext } from '../context/OrderContext';
-import { ShippingContext } from '../context/ShippingContext';
+import { SettingsContext } from '../context/SettingsContext';
 import { calculateShippingCost } from '../utils/shippingCalculator';
 import { optimizeImageUrl } from '../utils/optimizeImage';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
@@ -16,7 +16,7 @@ const Checkout = () => {
   const prefillShipping = location.state?.prefillShipping || 0;
   
   const { addOrder } = useContext(OrderContext);
-  const { shippingRates } = useContext(ShippingContext);
+  const { shippingRates, paymentSettings } = useContext(SettingsContext);
   const [shippingCost, setShippingCost] = useState(prefillShipping);
 
   const [formData, setFormData] = useState({
@@ -179,7 +179,7 @@ const Checkout = () => {
               <div className="payment-box">
                 <p style={{marginBottom: '15px', color: '#57606f'}}>Scan the QR code below using GPay, PhonePe, or Paytm to complete your purchase securely.</p>
                 <div className="qr-container" style={{textAlign: 'center', background: '#fff', padding: '20px', borderRadius: '10px', border: '2px dashed #dfe4ea'}}>
-                  <img src="/images/QRcode payment/1.jpeg?v=2" alt="Payment QR Code" style={{maxWidth: '250px', width: '100%'}} />
+                  <img src={paymentSettings?.qrCodeUrl || "/images/QRcode payment/1.jpeg?v=2"} alt="Payment QR Code" style={{maxWidth: '250px', width: '100%'}} />
                   <p style={{marginTop: '15px', fontWeight: 'bold', color: '#2f3542', fontSize: '1.2rem'}}>Amount to Pay: <span style={{color: '#ff4757'}}>₹{(product.price + shippingCost).toLocaleString()}</span></p>
                 </div>
                 

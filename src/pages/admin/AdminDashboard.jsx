@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ProductContext } from '../../context/ProductContext';
 import { AuthContext } from '../../context/AuthContext';
 import ConfirmModal from '../../components/ConfirmModal';
-import ShippingRatesModal from '../../context/ShippingRatesModal';
+import SettingsModal from '../../context/SettingsModal';
 import './Admin.css';
 
 const AdminDashboard = () => {
@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
-  const [shippingModalOpen, setShippingModalOpen] = useState(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
 
   const requestDelete = (id) => {
     setItemToDelete(id);
@@ -68,7 +68,7 @@ const AdminDashboard = () => {
       <div className="admin-header">
         <h1>Admin Dashboard</h1>
         <div className="admin-actions">
-          <button onClick={() => setShippingModalOpen(true)} className="btn btn-secondary" style={{background: '#ffa502', color: '#000000', border: 'none', fontWeight: 'bold'}}>Shipping Rates</button>
+          <button onClick={() => setSettingsModalOpen(true)} className="btn btn-secondary" style={{background: '#ffa502', color: '#000000', border: 'none', fontWeight: 'bold'}}>Edit Payments</button>
           <Link to="/admin/orders" className="btn btn-secondary">View Orders</Link>
           <Link to="/admin/leads" className="btn btn-secondary">View Leads</Link>
           <Link to="/admin/product/new" className="btn btn-primary">Add New Product</Link>
@@ -145,9 +145,9 @@ const AdminDashboard = () => {
         onCancel={() => setDeleteModalOpen(false)} 
       />
 
-      <ShippingRatesModal 
-        isOpen={shippingModalOpen}
-        onClose={() => setShippingModalOpen(false)}
+      <SettingsModal 
+        isOpen={settingsModalOpen}
+        onClose={() => setSettingsModalOpen(false)}
       />
     </div>
   );

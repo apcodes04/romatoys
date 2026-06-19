@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ProductContext } from '../context/ProductContext';
 import { LeadContext } from '../context/LeadContext';
-import { ShippingContext } from '../context/ShippingContext';
+import { SettingsContext } from '../context/SettingsContext';
 import { calculateShippingCost } from '../utils/shippingCalculator';
 import { optimizeImageUrl } from '../utils/optimizeImage';
 import { companyInfo } from '../data/companyInfo';
@@ -14,7 +14,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const { products: allProducts } = useContext(ProductContext);
   const { addLead } = useContext(LeadContext);
-  const { shippingRates } = useContext(ShippingContext);
+  const { shippingRates } = useContext(SettingsContext);
   const product = allProducts.find(p => p.id === id);
 
   useDocumentTitle(product ? `${product.name} | Roma Toys Mumbai` : 'Product Not Found | Roma Toys');
