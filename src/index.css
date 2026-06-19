@@ -10,24 +10,18 @@ body {
   font-family: 'Nunito', sans-serif;
   background-color: #f1f2f6;
   color: #2f3542;
+  overflow-x: hidden;
 }
 
-/* Scrollbar styles */
+html {
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+/* Hide Scrollbar globally */
 ::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-::-webkit-scrollbar-thumb {
-  background: #ff4757; 
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #ff6b81; 
+  display: none;
 }
 
 
