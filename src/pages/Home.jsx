@@ -56,7 +56,7 @@ const Home = () => {
         <h2>Visit Our Store in Mumbai</h2>
         <p style={{marginBottom: '30px', fontSize: '1.2rem', color: '#57606f'}}>{companyInfo.address}</p>
         
-        <div className="location-container" style={{maxWidth: '1000px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '30px', alignItems: 'stretch'}}>
+        <div className="location-container" style={{maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '30px', alignItems: 'stretch'}}>
           {/* Map */}
           <div className="map-wrapper" style={{flex: '2 1 500px', display: 'flex', flexDirection: 'column', borderRadius: '15px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.1)'}}>
             <iframe 
@@ -81,9 +81,9 @@ const Home = () => {
           </div>
 
           {/* Shop Images */}
-          <div className="shop-gallery" style={{flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '20px'}}>
-            <img src="/images/shopimage/1.png" alt="Shop view 1" style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
-            <img src="/images/shopimage/3.png" alt="Shop view 3" style={{width: '100%', height: '100%', objectFit: 'cover', borderRadius: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
+          <div className="shop-gallery" style={{flex: '1 1 350px', display: 'flex', flexDirection: 'column', gap: '20px'}}>
+            <img src="/images/shopimage/1.png" alt="Shop view 1" style={{width: '100%', flex: 1, minHeight: '200px', objectFit: 'cover', borderRadius: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
+            <img src="/images/shopimage/3.png" alt="Shop view 3" style={{width: '100%', flex: 1, minHeight: '200px', objectFit: 'cover', borderRadius: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.08)'}} />
           </div>
         </div>
       </section>
