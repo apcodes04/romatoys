@@ -68,7 +68,7 @@ const AdminDashboard = () => {
       <div className="admin-header">
         <h1>Admin Dashboard</h1>
         <div className="admin-actions">
-          <button onClick={() => setSettingsModalOpen(true)} className="btn btn-secondary" style={{background: '#ffa502', color: '#000000', border: 'none', fontWeight: 'bold'}}>Edit Payments</button>
+          <button onClick={() => setSettingsModalOpen(true)} className="btn btn-secondary" style={{background: '#ffa502', color: '#000000', border: 'none', fontWeight: 'bold'}}>Store Settings</button>
           <Link to="/admin/orders" className="btn btn-secondary">View Orders</Link>
           <Link to="/admin/leads" className="btn btn-secondary">View Leads</Link>
           <Link to="/admin/product/new" className="btn btn-primary">Add New Product</Link>

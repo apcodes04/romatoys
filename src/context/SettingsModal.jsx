@@ -3,7 +3,7 @@ import { SettingsContext } from './SettingsContext';
 import '../pages/admin/Admin.css';
 
 const SettingsModal = ({ isOpen, onClose }) => {
-  const { shippingRates, updateShippingRates, paymentSettings, updatePaymentSettings } = useContext(SettingsContext);
+  const { shippingRates, updateShippingRates, paymentSettings, updatePaymentSettings, homeSettings, updateHomeSettings } = useContext(SettingsContext);
   
   const [activeTab, setActiveTab] = useState('shipping');
   
@@ -15,6 +15,10 @@ const SettingsModal = ({ isOpen, onClose }) => {
   const [qrCodeUrl, setQrCodeUrl] = useState('');
   const [isUploadingQR, setIsUploadingQR] = useState(false);
 
+  // Home Images State
+  const [categoryImages, setCategoryImages] = useState({ car: '', jeep: '', bike: '', other: '' });
+  const [isUploadingHomeImage, setIsUploadingHomeImage] = useState(false);
+
   useEffect(() => {
     if (shippingRates) setLocalRates(shippingRates);
   }, [shippingRates]);
@@ -22,6 +26,10 @@ const SettingsModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (paymentSettings?.qrCodeUrl) setQrCodeUrl(paymentSettings.qrCodeUrl);
   }, [paymentSettings]);
+
+  useEffect(() => {
+    if (homeSettings?.categoryImages) setCategoryImages(homeSettings.categoryImages);
+  }, [homeSettings]);
 
   if (!isOpen) return null;
 
@@ -78,6 +86,38 @@ const SettingsModal = ({ isOpen, onClose }) => {
     }
   };
 
+  // --- Home Image Handlers ---
+  const handleHomeImageUpload = async (e, category) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setIsUploadingHomeImage(true);
+    try {
+      const cloudFormData = new FormData();
+      cloudFormData.append('file', file);
+      cloudFormData.append('upload_preset', 'cl4zbmfi');
+
+      const response = await fetch('https://api.cloudinary.com/v1_1/dxzhhxqub/image/upload', {
+        method: 'POST',
+        body: cloudFormData
+      });
+      
+      const data = await response.json();
+      const newUrl = data.secure_url;
+      
+      const newCategoryImages = { ...categoryImages, [category]: newUrl };
+      setCategoryImages(newCategoryImages);
+      
+      await updateHomeSettings({ categoryImages: newCategoryImages });
+      alert(`${category.toUpperCase()} image updated successfully!`);
+    } catch (error) {
+      console.error('Error uploading home image:', error);
+      alert('Failed to upload image. Please try again.');
+    } finally {
+      setIsUploadingHomeImage(false);
+    }
+  };
+
   return (
     <div className="modal-overlay">
       <div className="modal-content" style={{maxWidth: '500px', maxHeight: '90vh', overflowY: 'auto', padding: '20px'}}>
@@ -96,6 +136,12 @@ const SettingsModal = ({ isOpen, onClose }) => {
             style={{padding: '8px 15px', border: 'none', background: activeTab === 'payment' ? '#1e90ff' : '#f1f2f6', color: activeTab === 'payment' ? 'white' : '#2f3542', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold'}}
           >
             Payment QR Code
+          </button>
+          <button 
+            onClick={() => setActiveTab('home')} 
+            style={{padding: '8px 15px', border: 'none', background: activeTab === 'home' ? '#1e90ff' : '#f1f2f6', color: activeTab === 'home' ? 'white' : '#2f3542', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold'}}
+          >
+            Home Page Images
           </button>
         </div>
 
@@ -148,6 +194,35 @@ const SettingsModal = ({ isOpen, onClose }) => {
               />
               {isUploadingQR && <p style={{color: '#1e90ff', marginTop: '10px', fontWeight: 'bold'}}>Uploading and saving...</p>}
             </div>
+          </div>
+        )}
+
+        {activeTab === 'home' && (
+          <div>
+            <p style={{marginBottom: '20px', fontSize: '0.9rem', color: '#57606f'}}>Upload preview images for the categories displayed on the Home Page.</p>
+            
+            {['car', 'jeep', 'bike', 'other'].map((cat) => (
+              <div key={cat} style={{background: '#f8f9fa', padding: '15px', borderRadius: '10px', border: '1px solid #dfe4ea', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '15px'}}>
+                <div style={{flexShrink: 0, width: '80px', height: '80px', borderRadius: '8px', overflow: 'hidden', background: '#fff', border: '1px solid #ccc'}}>
+                  {categoryImages[cat] ? (
+                    <img src={categoryImages[cat]} alt={cat} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+                  ) : (
+                    <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', color: '#aaa'}}>No Image</div>
+                  )}
+                </div>
+                <div style={{flexGrow: 1, textAlign: 'left'}}>
+                  <h4 style={{margin: '0 0 10px 0', color: '#2f3542', textTransform: 'capitalize'}}>{cat === 'other' ? 'Other Toys' : `${cat}s`}</h4>
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={(e) => handleHomeImageUpload(e, cat)} 
+                    disabled={isUploadingHomeImage}
+                    style={{width: '100%', padding: '5px', border: '1px dashed #dfe4ea', borderRadius: '5px', cursor: 'pointer', fontSize: '0.8rem'}}
+                  />
+                </div>
+              </div>
+            ))}
+            {isUploadingHomeImage && <p style={{color: '#1e90ff', marginTop: '10px', fontWeight: 'bold', textAlign: 'center'}}>Uploading and saving...</p>}
           </div>
         )}
       </div>

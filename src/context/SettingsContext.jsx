@@ -7,6 +7,7 @@ export const SettingsContext = createContext();
 export const SettingsProvider = ({ children }) => {
   const [shippingRates, setShippingRates] = useState(null);
   const [paymentSettings, setPaymentSettings] = useState(null);
+  const [homeSettings, setHomeSettings] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -75,9 +76,44 @@ export const SettingsProvider = ({ children }) => {
       setLoading(false);
     });
 
+    // 3. Fetch Home Settings (Category Images)
+    const homeDocRef = doc(db, 'settings', 'home');
+    const unsubscribeHome = onSnapshot(homeDocRef, async (snapshot) => {
+      if (snapshot.exists()) {
+        setHomeSettings(snapshot.data());
+      } else {
+        const defaultHome = {
+          categoryImages: {
+            car: '/images/products/car/2.jpg',
+            jeep: '/images/products/jeep/RomaToys JEEP aug_page-0040.jpg',
+            bike: '/images/products/bike/13.jpg',
+            other: '/images/products/moretoys/1.png'
+          }
+        };
+        try {
+          await setDoc(homeDocRef, defaultHome);
+          setHomeSettings(defaultHome);
+        } catch (error) {
+          console.error("Error creating default home settings", error);
+          setHomeSettings(defaultHome);
+        }
+      }
+    }, (error) => {
+      console.error("Firebase fetch error for home settings:", error);
+      setHomeSettings({
+        categoryImages: {
+          car: '/images/products/car/2.jpg',
+          jeep: '/images/products/jeep/RomaToys JEEP aug_page-0040.jpg',
+          bike: '/images/products/bike/13.jpg',
+          other: '/images/products/moretoys/1.png'
+        }
+      });
+    });
+
     return () => {
       unsubscribeShipping();
       unsubscribePayment();
+      unsubscribeHome();
     };
   }, []);
 
@@ -91,12 +127,19 @@ export const SettingsProvider = ({ children }) => {
     await updateDoc(docRef, newSettings);
   };
 
+  const updateHomeSettings = async (newSettings) => {
+    const docRef = doc(db, 'settings', 'home');
+    await updateDoc(docRef, newSettings);
+  };
+
   return (
     <SettingsContext.Provider value={{ 
       shippingRates, 
       updateShippingRates,
       paymentSettings,
-      updatePaymentSettings
+      updatePaymentSettings,
+      homeSettings,
+      updateHomeSettings
     }}>
       {!loading && children}
     </SettingsContext.Provider>

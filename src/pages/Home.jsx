@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { companyInfo } from '../data/companyInfo';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { SettingsContext } from '../context/SettingsContext';
 import './Home.css';
 
 const Home = () => {
   useDocumentTitle('Roma Toys | Best Battery Operated Toy Cars & Bikes in Mumbai');
+  const { homeSettings } = useContext(SettingsContext);
+  
+  const images = homeSettings?.categoryImages || {
+    car: '/images/products/car/2.jpg',
+    jeep: '/images/products/jeep/RomaToys JEEP aug_page-0040.jpg',
+    bike: '/images/products/bike/13.jpg',
+    other: '/images/products/moretoys/1.png'
+  };
   return (
     <div className="home-container">
       {/* Hero Section */}
@@ -24,19 +33,19 @@ const Home = () => {
         <h2>Our Categories</h2>
         <div className="categories-grid">
           <Link to="/shop" className="category-card" state={{ category: 'car' }}>
-            <img src="/images/products/car/2.jpg" alt="Cars" loading="lazy" />
+            <img src={images.car} alt="Cars" loading="lazy" />
             <h3>Battery Operated Cars</h3>
           </Link>
           <Link to="/shop" className="category-card" state={{ category: 'jeep' }}>
-            <img src="/images/products/jeep/RomaToys JEEP aug_page-0040.jpg" alt="Jeeps" loading="lazy" />
+            <img src={images.jeep} alt="Jeeps" loading="lazy" />
             <h3>Off-Road Jeeps</h3>
           </Link>
           <Link to="/shop" className="category-card" state={{ category: 'bike' }}>
-            <img src="/images/products/bike/13.jpg" alt="Bikes" loading="lazy" />
+            <img src={images.bike} alt="Bikes" loading="lazy" />
             <h3>Sporty Bikes</h3>
           </Link>
           <Link to="/shop" className="category-card" state={{ category: 'other' }}>
-            <img src="/images/products/moretoys/1.png" alt="Other Toys" loading="lazy" />
+            <img src={images.other} alt="Other Toys" loading="lazy" />
             <h3>Other Fun Toys</h3>
           </Link>
         </div>
