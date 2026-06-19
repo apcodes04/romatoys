@@ -179,7 +179,7 @@ const Checkout = () => {
               <div className="payment-box">
                 <p style={{marginBottom: '15px', color: '#57606f'}}>Scan the QR code below using GPay, PhonePe, or Paytm to complete your purchase securely.</p>
                 <div className="qr-container" style={{textAlign: 'center', background: '#fff', padding: '20px', borderRadius: '10px', border: '2px dashed #dfe4ea'}}>
-                  <img src="/images/QRcode payment/1.jpeg" alt="Payment QR Code" style={{maxWidth: '250px', width: '100%'}} />
+                  <img src="/images/QRcode payment/1.jpeg?v=2" alt="Payment QR Code" style={{maxWidth: '250px', width: '100%'}} />
                   <p style={{marginTop: '15px', fontWeight: 'bold', color: '#2f3542', fontSize: '1.2rem'}}>Amount to Pay: <span style={{color: '#ff4757'}}>₹{(product.price + shippingCost).toLocaleString()}</span></p>
                 </div>
                 
